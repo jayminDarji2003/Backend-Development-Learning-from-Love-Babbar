@@ -29,3 +29,13 @@ app.post('/api/cars', (req, res) => {
     console.log(brand)
     res.send("car submitted successfully")
 })
+
+
+// mongodb port 
+const mongoDB = 'mongodb://127.0.0.1:27017/dot_batch'
+
+// Mongodb connection
+const mongoose = require('mongoose');
+mongoose.connect(mongoDB)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
