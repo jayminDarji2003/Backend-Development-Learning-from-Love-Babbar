@@ -19,7 +19,7 @@ app.use("/api/v1", blog);
 
 
 // listening the app
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 })
 
