@@ -8,7 +8,7 @@ require('dotenv').config()
 const connectDb = async () => {
     try {
         const db = await mongoose.connect(process.env.MONGODB_URL)
-        console.log("Connected to MongoDB atlas");
+        console.log("Connected to MongoDbCompass");
     }
     catch (err) {
         console.log("Error while connecting to MongoDB");

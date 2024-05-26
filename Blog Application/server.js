@@ -1,4 +1,4 @@
-// importing some datas
+// importing some files
 const express = require('express')
 const connectDb = require("./Config/database")
 
@@ -14,6 +14,7 @@ app.use(express.json());
 
 // importing routes
 const blog = require('./Routes/blogs')
+
 // mapping path
 app.use("/api/v1", blog);
 
