@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
         }
 
         // check user avalilable or not
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email });
 
         // if not a registered user
         if (!user) {
@@ -96,6 +96,7 @@ exports.login = async (req, res) => {
                     expiresIn: "2h"
                 });
 
+            user = user.toObject();
             user.token = token;  // add token to user
             user.password = undefined;
 
@@ -123,7 +124,8 @@ exports.login = async (req, res) => {
     } catch (err) {
         console.log(err)
         return res.status(500).json({
-            success:false,
+            success: false,
             message: "Couldn't login"
         })
     }
+}
