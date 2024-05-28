@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");  // importing mongoose
 require("dotenv").config()  // importing .env file data
 
-const dbConnect = async () => {
+exports.dbConnect = async () => {
     try {
         const connect = await mongoose.connect(process.env.DATABASE_URL);
         console.log("Connected to database successfully");
@@ -12,4 +12,4 @@ const dbConnect = async () => {
     }
 }
 
-module.exports = dbConnect;
+// module.exports = dbConnect();
