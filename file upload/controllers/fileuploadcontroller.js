@@ -199,7 +199,7 @@ exports.videoUpload = async (req, res) => {
 
 
 // reduce image then upload 
-exports.imageReducerUpload = async () => {
+exports.imageReducerUpload = async (req, res) => {
     try {
         // fetch the data from req
         const { name, email, tags } = req.body;
@@ -244,6 +244,7 @@ exports.imageReducerUpload = async () => {
 
         res.json({
             success: true,
+            image_url: response.secure_url,
             message: "File created successfully created successfully"
         })
 
