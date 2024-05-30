@@ -31,6 +31,7 @@ fileSchema.post("save", async function (doc) {
         // creating transporter
         const transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
+            port: 587,
             auth: {
                 user: process.env.MAIL_USER,
                 pass: process.env.MAIL_PASS,
@@ -40,7 +41,7 @@ fileSchema.post("save", async function (doc) {
         // send mail
         const info = await transporter.sendMail({
             from: "codewithjaymin", // sender address
-            to: "jay001darji@gmail.com", // list of receivers
+            to: "xawici8213@avastu.com", // list of receivers
             subject: "Hello ✔", // Subject line
             text: "New file uploaded to Cloudinary", // plain text body
             html: `<h1>Hii, This is from codewithjaymin</h1>
