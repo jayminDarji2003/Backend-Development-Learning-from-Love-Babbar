@@ -7,7 +7,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("user");
 
   const [errors, setErrors] = useState({});
 
@@ -21,8 +21,6 @@ const Register = () => {
     }
     if (!password) {
       errors.password = "Password is required";
-    } else if (password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
     }
     return errors;
   };
@@ -31,23 +29,29 @@ const Register = () => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Form submitted successfully");
-      console.log(name, email, password, role);
-      //toast.success("Form submitted successfully");
     } else {
       setErrors(validationErrors);
     }
 
     try {
-      const response = await axios.post("http://localhost:4000/register");
+      const response = await axios.post("http://localhost:4000/register", {
+        name,
+        email,
+        password,
+        role,
+      });
 
-      if (!response) {
+      console.log(response);
+
+      if (response.status === 201) {
+        toast.success("Successfully registered");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data.message);
+      } else {
         toast.error("An error occurred while registering");
       }
-
-      toast.success("Successfully registerd");
-    } catch (error) {
-      toast.error("An error occurred while registering");
     }
   };
 
