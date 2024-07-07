@@ -43,7 +43,7 @@ fileSchema.post("save", async function (doc) {
         const info = await transporter.sendMail({
             from: "jaymindarji2003@gmail.com", // sender address
             to: "jay001darji@gmail.com", // list of receivers
-            subject: "Hello ✔", // Subject line
+            subject: "Hello Jay darji", // Subject line
             text: "New file uploaded to Cloudinary", // plain text body
             html: `<h1>Hii, This is from codewithjaymin</h1>
                    <p>File uploaded successfully to Cloudinary</p>
