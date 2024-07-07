@@ -30,18 +30,19 @@ fileSchema.post("save", async function (doc) {
 
         // creating transporter
         const transporter = nodemailer.createTransport({
-            host: process.env.MAIL_HOST,
-            port: 587,
+            host: process.env.SMPT_HOST,
+            port: process.env.SMPT_PORT,
+            service: process.env.SMPT_SERVICE,
             auth: {
-                user: process.env.MAIL_USER,
-                pass: process.env.MAIL_PASS,
+                user: process.env.SMPT_MAIL,
+                pass: process.env.SMPT_PASSWORD,
             },
         });
 
         // send mail
         const info = await transporter.sendMail({
-            from: "codewithjaymin", // sender address
-            to: "xawici8213@avastu.com", // list of receivers
+            from: "jaymindarji2003@gmail.com", // sender address
+            to: "jay001darji@gmail.com", // list of receivers
             subject: "Hello ✔", // Subject line
             text: "New file uploaded to Cloudinary", // plain text body
             html: `<h1>Hii, This is from codewithjaymin</h1>
@@ -60,3 +61,7 @@ fileSchema.post("save", async function (doc) {
 
 const File = mongoose.model("File", fileSchema);
 module.exports = File;
+
+
+
+
