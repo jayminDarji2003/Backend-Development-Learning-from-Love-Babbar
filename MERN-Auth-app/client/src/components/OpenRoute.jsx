@@ -4,9 +4,9 @@ import { Navigate } from "react-router-dom";
 
 function OpenRoute({ children }) {
   const token = useSelector((state) => state.auth.token);
-  console.log(document.cookie);
+  console.log(token);
 
-  if (token === "") {
+  if (token === null) {
     return children;
   } else {
     return <Navigate to="/dashboard/user" />;
