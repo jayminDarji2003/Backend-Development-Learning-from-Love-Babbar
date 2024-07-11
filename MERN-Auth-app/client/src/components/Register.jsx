@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
+
+  const navigate = useNavigate()
 
   const [errors, setErrors] = useState({});
 
@@ -46,6 +49,13 @@ const Register = () => {
       if (response.status === 201) {
         toast.success("Successfully registered");
       }
+
+      setName("");
+      setEmail("");
+      setPassword("");
+      setRole("");
+
+      navigate("/login");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         toast.error(error.response.data.message);

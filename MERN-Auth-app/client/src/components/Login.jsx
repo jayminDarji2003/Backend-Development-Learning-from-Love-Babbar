@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import toast from "react-hot-toast";
+import { addToken } from "../redux/userSlice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const validate = () => {
     const errors = {};
@@ -23,13 +29,38 @@ const Login = () => {
     return errors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
+
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Form submitted successfully");
       console.log(email, password);
-      toast.success("Form submitted successfully");
+
+      try {
+        const response = await axios.post("http://localhost:4000/login", {
+          email,
+          password,
+        });
+
+        console.log(response);
+
+        if (response.status === 200) {
+          toast.success("Successfully login");
+        }
+
+        setEmail("");
+        setPassword("");
+
+        dispatch(addToken(response?.data?.token));
+
+        navigate("/dashboard/user");
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("An error occurred while login");
+        }
+      }
     } else {
       setErrors(validationErrors);
     }

@@ -101,13 +101,11 @@ const login = async (req, res) => {
             // create cookie
             const options = {
                 expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-                httpOnly: true
+                httpOnly: true,
             }
 
-            // create cookie
-            res.cookie("token", token, options);
-
-            return res.status(200).json({
+            // create cookie and send response
+            res.cookie("token", token, options).status(200).json({
                 success: true,
                 token,
                 user,
@@ -141,4 +139,4 @@ const users = async (req, res) => {
     }
 }
 
-module.exports = { register, login,users }
+module.exports = { register, login, users }

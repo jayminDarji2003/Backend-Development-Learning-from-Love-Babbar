@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import DashboardUser from "./components/DashboardUser";
 import DashboardAdmin from "./components/DashboardAdmin";
 import OpenRoute from "./components/OpenRoute";
-import ProtectedRoute from "./components/ProtectedRoute";
+// import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -34,23 +34,9 @@ export default function App() {
           }
         />
 
-        <Route
-          path="/dashboard/user"
-          element={
-            <ProtectedRoute>
-              <DashboardUser />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/dashboard/user" element={<DashboardUser />} />
 
-        <Route
-          path="/dashboard/admin"
-          element={
-            <ProtectedRoute>
-              <DashboardAdmin />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/dashboard/admin" element={<DashboardAdmin />} />
       </Routes>
     </BrowserRouter>
   );
